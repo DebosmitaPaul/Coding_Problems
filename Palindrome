@@ -1,0 +1,40 @@
+
+
+using System;
+
+
+namespace MyLearnings
+{
+    public class Palindrome
+    {
+        public static void Main()
+        {
+            string str = Console.ReadLine();
+            char[] str1 = str.ToCharArray();
+            int len = str.Length;
+            string[] s = str.Split(str[len / 2]);
+
+
+            if (s[0].Equals(s[1]))
+            {
+                Console.WriteLine("palindrome");
+                int j = len / 2 + 1;
+                for (int i = len -1 ; i >s[1].Length/2+s[1].Length+1 ; i--)
+                {
+                    char temp = str1[j];
+                    str1[j] = str1[i];
+                    str1[i] = temp;
+                    j++;
+                }
+                str = new string(str1);
+                Console.WriteLine(str);
+            }
+            else
+            {
+                Console.WriteLine("Not palindrome");
+            }
+            Console.Read();
+
+        }
+    }
+}
