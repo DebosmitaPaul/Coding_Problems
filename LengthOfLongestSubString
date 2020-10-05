@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+
+
+namespace MyLearnings
+{
+    public class LengthOfLongestSubString
+    {
+        // abcabcbb
+        // 3
+        public static void Main()
+        {
+            string s = Console.ReadLine();
+            int i = 0;
+            int j = 0;
+            int maxLength = 0;
+            HashSet<char> hashset = new HashSet<char>();
+            while (i<s.Length)
+            {
+                if (!hashset.Contains(s[i]))
+                {
+                    hashset.Add(s[i]);
+                    i++;
+                    maxLength = Math.Max(maxLength, hashset.Count);
+                    // maxLength + hashset.Count;
+                }
+                else
+                {
+                    hashset.Remove(s[j]);
+                    j++;
+                }
+            }
+
+            Console.WriteLine(maxLength);
+            Console.Read();
+        }
+    }
+}
