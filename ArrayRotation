@@ -1,0 +1,62 @@
+
+using System;
+
+namespace MyLearnings
+{
+    public class ArrayRotation
+    {
+        public static void Main()
+        {
+            Console.WriteLine("Enter number of rotation times : ");
+            int k =  Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter size of array : ");
+            int n = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter array : ");
+            string[] s = Console.ReadLine().Split(' ');
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = Int32.Parse(s[i]);
+            }
+
+            arr = Array_Rotation(arr, k, n);
+            
+            PrintArray(arr);
+
+            Console.Read();
+        }
+        private static int[] Array_Rotation(int[] arr, int k, int n)
+        {
+            if (k > n)
+            {
+                k = k - n;
+            }
+            int[] temp = new int[k];
+
+            for (int j = n - k, l = 0; j < n; j++)
+            {
+                temp[l] = arr[j];
+                l++;
+            }
+            for (int i = n - k - 1; i >= 0; i--)
+            {
+                arr[i + k] = arr[i];  // 1 2 1 2 3 4 5
+            }
+
+            for (int i = 0; i < k; i++)
+            {
+                arr[i] = temp[i];
+            }
+
+            return arr;
+        }
+
+        private static void PrintArray(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write(arr[i] + " ");
+            }
+        }
+    }
+}
