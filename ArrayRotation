@@ -29,7 +29,7 @@ namespace MyLearnings
         {
             if (k > n)
             {
-                k = k - n;
+                k = k % n;
             }
             int[] temp = new int[k];
 
