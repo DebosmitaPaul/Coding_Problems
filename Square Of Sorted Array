@@ -1,0 +1,65 @@
+using System;
+
+namespace MyLearnings
+{
+    public class Sorted_Square
+    {
+        public static void Main()
+        {
+            int[] a ={-4, -1, 0, 3, 5}; //{-1, 0, 1}; //{0};//{-5, 1};
+            int n = a.Length;
+            int positive_Pointer = 0;
+            int negative_Pointer = 0;
+
+            //positive_Pointer will increased till we get the positive integer
+            while (positive_Pointer < n && a[positive_Pointer] < 0)
+            {
+                positive_Pointer++;
+            }
+
+            negative_Pointer = positive_Pointer - 1;
+
+            int[] sortedSquare = new int[n];
+            int counter = 0;
+
+            //compare -4 with 3 (positive and negative)
+            while (positive_Pointer<n && negative_Pointer>=0)
+            {
+                if (a[positive_Pointer]*a[positive_Pointer] < a[negative_Pointer]*a[negative_Pointer])
+                {
+                    sortedSquare[counter] = a[positive_Pointer] * a[positive_Pointer];
+                    positive_Pointer++;
+                }
+                else
+                {
+                    sortedSquare[counter] = a[negative_Pointer] * a[negative_Pointer];
+                    negative_Pointer--;
+                }
+                counter++;
+            }
+
+            //Only negative numbers are present
+            while (negative_Pointer>=0)
+            {
+                sortedSquare[counter] = a[negative_Pointer] * a[negative_Pointer];
+                negative_Pointer--;
+                counter++;
+            }
+
+            //Only positive numbers are present
+            while (positive_Pointer < n)
+            {
+                sortedSquare[counter] = a[positive_Pointer] * a[positive_Pointer];
+                positive_Pointer++;
+                counter++;
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write(sortedSquare[i] + " ");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
