@@ -1,0 +1,33 @@
+using System;
+
+namespace ProblemSolving
+{
+    class RightCircularArrayRotation
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 1, 2, 3, 4, 5 };
+            int[,] ranges =new int[2,2] { { 0, 2 }, { 0, 3 } };
+            int index = 1;
+                       
+            for (int i = 0; i < 2; i++)
+            {
+                int startIndex = ranges[i,0];
+                int endIndex = ranges[i,1];
+                RightArrayRotation(arr, startIndex, endIndex);
+            }
+            Console.WriteLine(arr[index]);
+            Console.ReadLine();
+        }
+
+        private static void RightArrayRotation(int[] arr, int startIndex, int endIndex)
+        {
+            int temp = arr[endIndex];
+            for (int i = endIndex-1; i >=0; i--)
+            {
+                arr[i + 1] = arr[i];
+            }
+            arr[startIndex] = temp;
+        }
+    }
+}
