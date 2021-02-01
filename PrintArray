@@ -1,0 +1,15 @@
+using System;
+
+namespace ProblemSolving
+{
+    public static class PrintArray
+    {
+        public static void Print(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write(arr[i] + " ");
+            }
+        }
+    }
+}
