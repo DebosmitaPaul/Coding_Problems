@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProblemSolving
+{
+    class Move_AllNegFirst_AllPosEnd
+    {      
+        static void Main(string[] args)
+        {
+            int[] arr = { -12, 11, -13, -5, 6, -7, 5, -3, -6 };
+            PrintArray.Print(arr);
+            Console.WriteLine();
+            Arrange(arr);
+            PrintArray.Print(arr); //-12 -13 -5 -7 -3 -6 11 6 5
+            Console.Read();
+        }
+
+        private static void Arrange(int[] arr)
+        {
+            int n = arr.Length;
+            int k = 0, l =0;
+            int[] pos = new int[3];
+            for (int i = 0; i < n; i++)
+             {
+                if(arr[i]<0)
+                {
+                    arr[k] = arr[i];
+                    k++;
+                }
+                else
+                {
+                    pos[l] = arr[i];
+                    l++;
+                }
+            }
+            int p = 0;
+            for (; k < n; k++)
+            {
+                arr[k] = pos[p];
+                p++;
+            }
+        }
+    }
+}
