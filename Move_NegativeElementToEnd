@@ -1,0 +1,68 @@
+using System;
+
+namespace ProblemSolving
+{
+    class Move_NegativeElementToEnd
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 1, -1, 3, 2, -7, -5, 11, 6 };
+            PrintArray.Print(arr);
+            Console.WriteLine();
+            Modify(arr);
+            PrintArray.Print(arr); //1  3  2  11  6  -1  -7  -5 
+            Console.Read();
+        }
+
+        //Optimised way
+        private static void Modify(int[] arr)
+        {
+            int n = arr.Length;
+            int count=0;
+            for (int i = n-1; i >=0; i--)
+            {
+                if(arr[i] <0)
+                {
+                    int temp = arr[i];
+                    int k = 0;
+                    //shift 11 ,6
+                    for (k =i;k<n-1-count ; k++)
+                    {
+                        arr[k] = arr[k + 1];
+                    }
+                    arr[k] = temp;
+                    count++;
+                }
+            }
+        }
+
+        private static int[] Rearrange(int[] arr)
+        {
+            int n = arr.Length;
+            int[] negative_Array = new int[n];
+            int[] positive_Array = new int[n];
+            int k = 0, l =0;
+            for (int i = 0; i < n; i++)
+            {
+                if(arr[i]<0)
+                {
+                    negative_Array[k] = arr[i];
+                    k++; 
+                }
+                else
+                {
+                    positive_Array[l] = arr[i];
+                    l++;
+                }
+            }
+            int m = 0;
+            while(l<n && m<k)
+            {
+                positive_Array[l] = negative_Array[m];
+                m++;
+                l++;
+            }
+            return positive_Array;
+        }
+    }
+}
