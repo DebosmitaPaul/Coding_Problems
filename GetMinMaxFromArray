@@ -40,7 +40,7 @@ namespace ProblemSolving
                 {
                     min = arr[i];
                 }
-                if (arr[n - 1 - i] > max)
+                else if (arr[n - 1 - i] > max)
                 {
                     max = arr[n - 1 - i];
                 }
