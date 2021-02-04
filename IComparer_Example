@@ -1,0 +1,80 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace ProblemSolving
+{
+    public class Employee : IComparable
+    {
+        public string name;
+        public int age;
+
+        public int CompareTo(object obj)
+        {
+            Employee e = (Employee)obj;
+            return e.age - this.age;
+        }
+        public override string ToString()
+        {
+            return name + " " + age;
+        }
+    }
+    public class EmployeeComparision : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            Employee e1 = (Employee)x;
+            Employee e2 = (Employee)y;
+            return e1.age - e2.age;
+        }
+    }
+    public static class MyComparison
+    {
+        public static int Compare(object x,object y)
+        {
+            return ((Employee)x).age - ((Employee)y).age;
+        }
+    }
+    class ComparerExample
+    {
+        static void Main_10(string[] args)
+        {
+            ArrayList employees = new ArrayList();
+            employees.Add(new Employee { name = "Ram", age = 56 });
+            employees.Add(new Employee { name = "Ajay", age = 26 });
+            employees.Add(new Employee { name = "Shyam", age = 50 });
+            employees.Add(new Employee { name = "Rahul", age = 16 });
+            employees.Add(new Employee { name = "Nishant", age = 36 });
+
+            var emp1 = new Employee { name = "Ram1", age = 06 };
+            var emp2 = new Employee { name = "Ajay1", age = 2 };
+
+            //IComparer example:
+             EmployeeComparision e = new EmployeeComparision();
+             employees.Sort(e);
+
+            // IComparable example : 
+            employees.Sort();
+
+            List<Employee> myList = new List<Employee>();
+            myList.Add(new Employee { name = "Ram", age = 56 });
+            myList.Add(new Employee { name = "Ajay", age = 26 });
+            myList.Add(new Employee { name = "Shyam", age = 50 });
+            myList.Add(new Employee { name = "Rahul", age = 16 });
+            myList.Add(new Employee { name = "Nishant", age = 36 });
+
+            //Comparison delegate example :
+            Comparison<Employee> comparisonDelegate = new Comparison<Employee>(MyComparison.Compare);
+            myList.Sort(comparisonDelegate);
+
+            foreach (var item in myList)
+            {
+                Console.WriteLine(item.ToString());
+
+            }
+
+            Console.Read();
+        }
+
+    }
+}
