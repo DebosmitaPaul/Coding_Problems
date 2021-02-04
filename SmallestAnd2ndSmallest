@@ -1,0 +1,52 @@
+using System;
+
+namespace ProblemSolving
+{
+    class SmallestAnd2ndSmallest
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 12,3, 11, 2, 10, 34, 9, 1 };
+            PrintArray.Print(arr);
+            Console.WriteLine();
+            int min1, min2;
+            SmallestNumbers(arr,out min1,out min2);
+            Console.WriteLine(min1);
+            Console.WriteLine(min2);
+
+            Console.Read();
+        }
+
+        private static void SmallestNumbers(int[] arr, out int min1, out int min2)
+        {
+            int n = arr.Length;
+            if(n==1)
+            {
+                min1 = min2 = arr[0];
+                return;
+            }
+            if(arr[0]<arr[1])
+            {
+                min1 = arr[0]; //12
+                min2 = arr[1]; //13
+            }
+            else
+            {
+                min1 = arr[1];
+                min2 = arr[0];
+            }
+            for (int i = 2; i < n; i++)
+            {
+                if(arr[i]<min1) //2<12 , 10<2, 34<2, 1<2
+                {
+                    min2 = min1;    //min2 : 12,2
+                    min1 = arr[i];  //min1 : 2,1
+                }
+                else if(arr[i]<min2) //10<12 , 34<12
+                {
+                    min2 = arr[i]; //min2 : _, 10,
+                }
+            }
+        }
+    }
+}
