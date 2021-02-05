@@ -1,0 +1,33 @@
+using System;
+
+namespace ProblemSolving
+{
+    class MaximumSum_No2Numbers_Adjacent
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 20, 5, 10, 100, 10, 5  };
+            PrintArray.Print(arr);
+            Console.WriteLine();
+            int max = 0 ;
+            MaxSum(arr, out max);
+            Console.WriteLine(max);
+            Console.Read();
+        }
+
+        private static void MaxSum(int[] arr, out int max)
+        {
+            int n = arr.Length;
+            int a= arr[0];
+            int b_max = 0;
+            int c_max = 0;
+            for (int i = 1; i < n; i++)
+            {
+                c_max = a > b_max ? a : b_max;
+                a = arr[i] + b_max;
+                b_max = c_max;
+            }
+            max = a > b_max ? a : b_max;
+        }
+    }
+}
