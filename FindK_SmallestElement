@@ -1,0 +1,43 @@
+using System;
+using System.Linq;
+
+namespace ProblemSolving
+{
+    //k smallest elements in same order using O(1) extra space
+    class FindK_SmallestElement
+    {
+        static void Main(string[] args) //16
+        {
+            int[] arr1 = {4,6,1, 2, 5,8 };
+            PrintArray.Print(arr1);
+            Console.WriteLine();
+            int k =SmallestNumber(arr1);
+            Console.WriteLine(k);
+            Console.Read();
+        }
+
+        private static int SmallestNumber(int[] arr1)
+        {
+            int n = arr1.Length;
+            for (int i = 0; i < n - 1; i++)
+            {
+                int min = 0;// i;
+                for (int j = i+ 1; j < n; j++)
+                {
+                    if (arr1[min] > arr1[j] && min < n)
+                    {
+                        min = j;
+                    }
+                }
+                int temp = arr1[min];
+                arr1[min] = arr1[i];
+                arr1[i] = temp;
+                if (!arr1.Contains(arr1[i] + 1))//((arr1[i] +1) !=arr1[k])
+                {
+                    return (arr1[i] + 1);
+                }
+            }
+            return arr1[0]-1;
+        }
+    }
+}
