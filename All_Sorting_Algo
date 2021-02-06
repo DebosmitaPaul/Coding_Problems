@@ -1,0 +1,224 @@
+
+namespace Doubt
+{
+    class Sortings
+    {
+        public static void Main(string[] args)
+        {
+            //int n = 6;
+            int[] arr = new int[] { 5,4,7,2,1,3};
+            //int p = 7;
+            //int result = Linear(arr, p);
+            //int[] a = Bubble_Sort(arr); 
+            //int[] a = Selection(arr);
+            //int[] a = Insertion(arr);
+            // int[] a = Quick_Sort(arr, 0, arr.Length-1);
+            
+            //Merge_sort(arr,0, arr.Length-1);
+            Heap_Sort(arr, arr.Length);
+
+            Print(arr);
+            //Print(a);
+            Console.ReadLine();
+        }
+
+        private static void Heap_Sort(int[] arr, int n)
+        {
+            // create maxheap
+            //Heapify
+
+            for (int i = n/2 -1; i >= 0; i--)
+            {
+                MaxHeapify(arr, n , i);
+            }
+
+            //delete a data from max heap
+            for (int i = n-1; i > 0; i --)
+            {
+                swap(ref arr[i], ref arr[0]);
+                MaxHeapify(arr, i, 0);
+            }
+
+        }
+
+        private static void MaxHeapify(int[] arr, int n, int i)
+        {
+            int largest = i; //index
+            int l = 2*largest+1;
+            int r = 2*largest +2;
+
+            //54 to 62 => pointing the largest element index
+            while(l<n && arr[l]>arr[largest])
+            {
+                largest = l;
+            }
+            while(r<n && arr[r]>arr[largest])
+            {
+                largest = r;
+            }
+            //if largest update with l/r value
+            if(largest!=i)
+            {
+                swap(ref arr[largest], ref arr[i]);
+                Print(arr);
+                MaxHeapify(arr, n, largest);
+            }
+            Console.WriteLine("-----------------------");
+            Print(arr);
+            Console.WriteLine("-----------------------");
+        }
+
+        private static void Merge_sort(int[] arr,int lb, int ub)
+        {
+            if(lb<ub)
+            {
+                int mid = (lb + ub) / 2;
+                Merge_sort(arr, lb, mid);
+                Merge_sort(arr, mid + 1, ub);
+                Merge(lb, mid, ub, arr);
+            }
+        }
+
+        private static void Merge(int lb, int mid, int ub, int[] arr)
+        {
+            int i = lb, k = lb, j = mid + 1;
+            int[] b = new int[ub + 1];
+            while (i <= mid && j <= ub)
+            {
+                if (arr[i] <= arr[j])
+                {
+                    b[k] = arr[i];
+                    i++;
+                    k++;
+                }
+                else
+                {
+                    b[k] = arr[j];
+                    j++;
+                    k++;
+                }
+            }
+            while(i<=mid)
+            {
+                b[k] = arr[i];
+                i++;k++;
+            }
+            while (j <= ub)
+            {
+                b[k] = arr[j];
+                j++; k++;
+            }
+            for (int l = lb; l < ub; l++)
+            {
+                arr[l] = b[l];
+            }
+        }
+
+        private static int[] Quick_Sort(int[] arr, int lb, int ub)
+        {
+            if (lb < ub)
+            {
+                int pivot = arr[lb];
+                int loc = Partition(lb, ub, pivot, arr);
+                Quick_Sort(arr, lb, loc - 1);
+                Quick_Sort(arr, loc + 1, ub);
+            }
+            return arr;
+        }
+
+        private static int Partition(int lb, int ub, int pivot, int[] arr)
+        {
+            while (lb < ub)
+            {
+                while (arr[lb] < pivot)
+                {
+                    lb++;
+                }
+                while (arr[ub] > pivot)
+                {
+                    ub--;
+                }
+                if (lb < ub)
+                {
+                    swap(ref arr[lb], ref arr[ub]);
+                }
+            }
+            swap(ref pivot, ref arr[lb]);
+            return ub;
+        }
+
+        private static int[] Insertion(int[] arr)
+        {
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int temp = arr[i];
+                int j = i - 1;
+                while (j >= 0 && temp < arr[j])
+                {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+                arr[j+1] = temp;
+            }
+            return arr;
+        }
+
+        private static int[] Selection(int[] arr)
+        {
+            for (int i = 0; i < arr.Length ; i++)
+            {
+                int min = i;
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[min] > arr[j])
+                    {
+                        min = j;
+                    }
+                }
+                swap(ref arr[i], ref arr[min]);
+            }
+            return arr;
+        }
+        private static int[] Bubble_Sort(int[] arr)
+        {
+            for (int i = 0; i < arr.Length -1; i++)
+            {
+                for (int j = 0; j < arr.Length -1; j++)
+                {
+                    if(arr[j]>arr[j+1])
+                    {
+                        swap(ref arr[j], ref arr[j+1]);
+                    }
+                }
+            }
+            return arr;
+        }
+
+        private static void swap(ref int v1,ref int v2)
+        {
+            int temp = v1;
+            v1 = v2;
+            v2 = temp;
+        }
+        private static void Print(int[] a)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                Console.Write(a[i] +" ");
+            }
+            Console.WriteLine();
+        }
+
+        private static int Linear(int[] arr, int p)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i].Equals(p))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+    }
+}
