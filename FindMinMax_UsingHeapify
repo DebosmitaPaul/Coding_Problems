@@ -1,0 +1,81 @@
+ class  FindMinMax_UsingHeapify
+    {
+        static void Main(string[] args)
+        {
+            int[] a = {5,8,4,9,3,6 };
+            PrintMaxElement(a);
+            PrintMinElement(a);
+
+            //int l =111, r = 155;
+            //CalculateReleatedNumber(l, r);
+            Console.WriteLine();
+            Console.Read();
+        }
+
+        private static void PrintMaxElement(int[] a)
+        {
+            int n = a.Length;
+            for (int i = (n/2) -1; i >=0; i--)
+            {
+                MaxHeapify(a, n, i);
+                Console.WriteLine(a[i]);
+            }
+            Console.WriteLine("Max : "+a[0]);
+        }
+
+        private static void MaxHeapify(int[] a, int n, int i)
+        {
+            int largest = i;
+            int l = 2 * largest + 1;
+            int r = 2 * largest + 2;
+            if (l < n && a[l]>a[largest])
+            {
+                largest = l;
+            }
+            if (r < n && a[r] > a[largest])
+            {
+                largest = r;
+            }
+            if(largest!=i)
+            {
+                int temp = a[largest];
+                a[largest] = a[i];
+                a[i] = temp;
+                MaxHeapify(a, n, largest);
+            }
+        }
+
+        private static void PrintMinElement(int[] a)
+        {
+            int n = a.Length;
+            for (int i = (n / 2) - 1; i >= 0; i--)
+            {
+                MinHeapify(a, n, i);
+                Console.WriteLine(a[i]);
+            }
+            Console.WriteLine("Min : "+a[0]);
+        }
+
+        private static void MinHeapify(int[] a, int n, int i)
+        {
+            int min = i;
+            int l = 2 * min + 1;
+            int r = 2 * min + 2;
+            if(l<n && a[l]< a[min])
+            {
+                min = l;
+            }
+            if(r<n && a[r]< a[min])
+            {
+                min = r;
+            }
+            if(min!=i)
+            {
+                int temp = a[min];
+                a[min] = a[i];
+                a[i] = temp;
+                MinHeapify(a, n, min);
+            }
+        }
+     }
+}
