@@ -1,0 +1,33 @@
+using System;
+
+namespace ProblemSolving
+{
+    class MinDiff_InTwoElements
+    {
+        static void Main(string[] args)
+        {
+            int[] arr1 = { 30, 5, 20, 9,7 ,8}; ; //{ 1, 5, 3, 19, 18, 25 };
+
+            int maxDiff = MinDifference(arr1);
+            Console.WriteLine("maxDiff : " + maxDiff);
+            Console.Read();
+        }
+
+        private static int MinDifference(int[] arr1)
+        {
+            int min = int.MaxValue;
+            for (int i = 0; i < arr1.Length-1; i++)
+            {
+                for (int j = i+1; j < arr1.Length; j++)
+                {
+                    int len = Math.Abs( arr1[i] - arr1[j] );
+                    if(len<min)
+                    {
+                        min = len;
+                    }
+                }
+            }
+            return min;
+        }
+    }
+}
