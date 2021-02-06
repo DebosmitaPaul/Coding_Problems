@@ -1,0 +1,40 @@
+using System;
+
+namespace ProblemSolving
+{
+    class LongestSpan_SameSum_In2BinaryArray
+    {
+        static void Main(string[] args) 
+        {
+            int[] arr1 = {0, 1, 0, 1, 1, 1, 1}; //{ 0, 1, 0, 0, 0, 0 };
+            int[] arr2 = { 1, 1, 1, 1, 1, 0, 1 }; //{ 1, 0, 1, 0, 0, 1 };
+
+            int maxLength = LongestLength_SameSum(arr1,arr2);
+            Console.WriteLine("maxLength : " + maxLength);
+            Console.Read();
+        }
+
+        private static int LongestLength_SameSum(int[] arr1, int[] arr2)
+        {
+            int maxLen = 0;
+            for (int i = 0; i < arr1.Length; i++)
+            {
+                int sum1 = 0, sum2 = 0;
+                for (int j = i; j < arr1.Length; j++)
+                {
+                    sum1 = sum1 + arr1[j];
+                    sum2 = sum2 + arr2[j];
+                    if(sum1 == sum2)
+                    {
+                        int len = j - i + 1;
+                        if(len>maxLen)
+                        {
+                            maxLen = len;
+                        }
+                    }
+                }
+            }
+            return maxLen;
+        }
+    }
+}
