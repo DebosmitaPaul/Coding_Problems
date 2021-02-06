@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+
+
+namespace ProblemSolving
+{
+    class TotalNumber_RepetatedDigit
+    {
+        static void Main(string[] args)
+        {
+            int l =111, r = 155;
+            CalculateReleatedNumber(l, r);
+            Console.WriteLine();
+            Console.Read();
+        }
+
+        private static void CalculateReleatedNumber(int l, int r)
+        {
+            int count = 0;
+            for (int i= l; i <=r; i++)
+            {
+                count = count + IsRepeated(i);
+            }
+            Console.WriteLine(count);
+        }
+
+        private static int IsRepeated(int n)
+        {
+            HashSet<int> h = new HashSet<int>();
+
+            while (n != 0)
+            {
+                int p = n % 10;
+                if (h.Contains(p))
+                {
+                    return 0;
+                }
+                h.Add(p);
+                n = n / 10;
+            }
+
+            return 1;
+        }
+    }
+}
