@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProblemSolving
+{
+    class KthLargestSum_Contiguous_Array
+    {
+        static void Main(string[] args) //24
+        {
+            int[] a = { 10, -10, 20, -40 }; // { 20, -5, -1 };
+            int k = 6;
+
+            int max = KthLargestSum(a,k);
+            Console.WriteLine("Max  : " + max);
+            Console.Read();
+        }
+
+        private static int KthLargestSum(int[] a, int k)
+        {
+            int[] b = new int[k];
+            int n = a.Length;
+            List<int> list = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                list.Add(a[i]);
+                int sum =a[i];
+                for (int j = i+1; j < n; j++)
+                {
+                    sum += a[j];
+                    list.Add(sum);
+                }
+            }
+            list.Sort();
+            return list.ElementAt(list.Count-k);
+        }
+    }
+}
