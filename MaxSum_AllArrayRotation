@@ -16,7 +16,30 @@ namespace ProblemSolving
             Console.WriteLine("Max  : " + max);
             Console.Read();
         }
-
+        //efficent 0(n)
+        private static int MaxSum_1(int[] a)
+        {
+            int sum = 0;
+            int n = a.Length;
+            for (int i = 0; i < n; i++)
+            {
+                sum += a[i];
+            }
+            int max = 0,min=0;
+            for (int i = 0; i < n; i++)
+            {
+                max = max + a[i] * i;
+            }
+            for (int i = 1; i < n; i++)
+            {
+                min = max - (sum - a[i - 1]) + a[i - 1] * (n - 1);
+                if (min > max)
+                    max = min;
+            }
+            return max;
+        }
+        
+        //0(n2)
         private static int MaxSum(int[] a)
         {
             int min = 0, max = 0;
