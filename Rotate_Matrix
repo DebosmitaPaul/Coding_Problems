@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProblemSolving
+{
+    class Rotate_Matrix
+    {
+        static void Main(string[] args) //25
+        {
+
+            //int[,] a = { {1, 2, 3, 4},
+            //        {5, 6, 7, 8},
+            //        {9, 10, 11, 12},
+            //        {13, 14, 15, 16} };
+            int[,] a = {{1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9}
+                       };
+            int r = 3;// 4;
+            int c = 3;// 4;
+            Rotation(a,r,c);
+            Console.Read();
+        }
+
+        private static void Rotation(int[,] a, int r, int c)
+        {
+            int R = r;
+            int C = c;
+            for (int i = 0; i < r; i++)
+            {
+                int j = i;
+                int k = i;
+                int prev = a[k, j];
+                int next = a[k, j+1];
+                //top
+                j++;
+                while ( j < c) // <4
+                {
+                    a[k, j] = prev;
+                    prev = next;
+                    if (j < c - 1)
+                    {
+                        next = a[k, j + 1];
+                    }
+                    j++;
+                }
+                //right
+                j --; //3
+                k++;
+                while(k<r)
+                {
+                    prev = a[k, j];
+                    a[k, j] = next;
+                    next = prev;
+                    k++;
+                }
+                //bottom
+                j--;
+                k--;
+                while(j>=i)
+                {
+                    prev = a[k, j];
+                    a[k, j] = next;
+                    next = prev;
+                    j--;
+                }
+                //left
+                j++;
+                k--;
+                while(k>=i)
+                {
+                    prev = a[k, j];
+                    a[k, j] = next;
+                    next = prev;
+                    k--;
+                }
+                r--;
+                c--;
+
+            }
+
+            Print(a,R,C);            
+        }
+        private static void Print(int[,] a,int r, int c)
+        {
+            for (int i = 0; i < r; i++)
+            {
+                for (int j = 0; j < c; j++)
+                {
+                    Console.Write(a[i,j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+            //5    1    2    3
+            //9    10   6    4
+            //13   11   7    8
+            //14   15   16   12
+    }
+}
