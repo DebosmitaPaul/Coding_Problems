@@ -1,0 +1,82 @@
+using System;
+
+namespace ProblemSolving
+{
+    class Rotate_SquareMatrix_90Degree
+    {
+        static void Main(string[] args) //26
+        {
+
+            int[,] a = { {1, 2, 3, 4},
+                    {5, 6, 7, 8},
+                    {9, 10, 11, 12},
+                    {13, 14, 15, 16} };
+            //int[,] a = new int[,] {{1, 2, 3},
+            //            {4, 5, 6},
+            //            {7, 8, 9}
+            //           };
+            int r = 4;
+            int c = 4;
+            Rotation(a, r, c);
+            Console.Read();
+        }
+
+        private static void Rotation(int[,] a, int r, int c)
+        {
+            int R = r, C = c;
+            for (int i = 0; i < r-1; i++)
+            {
+                int k = i;
+                int j = i;
+                int[] temp = new int[r-i- 1];
+                int l = 0;
+                r = r - 1;
+                c = c - 1;
+                //top -> left
+                while (j<r)
+                {
+                    temp[l] = a[c-j+i,k];
+                    a[c-j+i,k]  = a[k, j];
+                    j++;
+                    l++;
+                }
+
+                //right -> top
+                while(k<r)
+                {
+                    a[i, k] = a[k, c];
+                    k++;
+                }
+
+                //bottom ->right
+                while(k>i)
+                {
+                    a[c-k+i, c] = a[c,k];
+                    k--;
+                }
+                //left -> buttom (temp)
+                while(l>0)
+                {
+                    a[c, l+i] = temp[c-l-i];
+                    l--;
+                }
+                //r--;c--;
+                Console.WriteLine("--------------------");
+                Print(a, R, C);
+
+            }
+        }
+
+        private static void Print(int[,] a, int r, int c)
+        {
+            for (int i = 0; i < r; i++)
+            {
+                for (int j = 0; j < c; j++)
+                {
+                    Console.Write(a[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
