@@ -1,0 +1,55 @@
+using System;
+
+namespace ProblemSolving
+{
+    class MaximumPath_Sum_Matrix
+    {
+        static void Main(string[] args) //28
+        {
+            int[,] a = {{10, 10, 2,  0, 20, 4},
+                        { 1,  0, 0, 30,  2, 5},
+                        { 0, 10, 4,  0,  2, 0},
+                        { 1,  0, 2, 20,  0, 4}};
+            //int[,] a = new int[,] {{0, 1, 2},
+            //             {3, 4, 5},
+            //             {6, 7, 8}};
+            MaximumPath_Sum(a, 6,4);
+            Console.Read();
+        }
+
+        private static void MaximumPath_Sum(int[,] a, int n, int m)
+        {
+            int sum = 0;
+            int index = 0;
+            int max = a[0, 0];
+
+            for (int j = 1; j < n; j++) //row
+            {
+                if(max<a[0,j])
+                {
+                    max = a[0, j];
+                    index = j;
+                    sum = max;
+                }    
+            }
+                
+            for (int i = 1; i < m; i++) //row
+            {
+                max = a[i,index];
+                if (max < a[i, index - 1])
+                {
+                    max = a[i, index - 1];
+                    index -- ;
+                }
+                else if (max< a[i, index + 1])
+                {
+                    max = a[i, index + 1];
+                    index++;
+                }
+                sum = sum + max;
+            }
+
+            Console.WriteLine("MaximumPath_Sum_Matrix = " + sum);
+        }
+    }
+}
