@@ -1,0 +1,54 @@
+using System;
+
+namespace ProblemSolving
+{
+    class Merge_Two__Sorted_Arrays
+    {
+        static void Main(string[] args) //29
+        {
+            int[] ar1 = { 1, 5, 9, 10, 15, 20 };
+            int[] ar2 = { 2, 3, 8, 13 };
+
+            MargeArrays(ar1,ar2);
+            Console.Read();
+        }
+
+        private static void MargeArrays(int[] ar1, int[] ar2)
+        {
+            int n1 = ar1.Length;
+            int n2 = ar2.Length;
+            for (int i = n2-1;  i>=0; i--)
+            {
+                int max = ar2[i]; //last element 13
+                int j =n1-1;
+                while(j >= 0)
+                {
+
+                    if(max<ar1[j]) //13<20
+                    {
+                        max = ar1[j];
+                        ar1[j] = ar2[i];
+                        ar2[i] = max;
+                        max = ar1[j]; //13
+                    }
+                    //shift array if ar[j] is less
+                    if(j-1 >=0 && max<ar1[j-1])
+                    {
+                        ar1[j] = ar1[j - 1];
+                        ar1[j - 1] = max;
+                    }
+                    j--;
+                }
+            }
+            for (int i = 0; i < n1; i++)
+            {
+                Console.Write(ar1[i]+ " ");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < n2; i++)
+            {
+                Console.Write(ar2[i] + " ");
+            }
+        }
+    }
+}
