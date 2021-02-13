@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ProblemSolving
+{
+    class CountDistinctPairs_SameDifference
+    {
+        static void Main(string[] args) //30
+        {
+            int[] ar1 = { 8, 12, 12, 9, 16, 4, 0, 20 };
+            int k = 4;
+            CountDistinctPairs(ar1, k);
+            Console.Read();
+        }
+
+        private static void CountDistinctPairs(int[] ar1,int k)
+        {
+            int count = 0;
+            SortedSet<int> set = new SortedSet<int>();
+            for (int l = 0; l < ar1.Length; l++)
+            {
+                set.Add(ar1[l]);
+            }
+            int i = set.Count-1;
+            int j = i-1;
+            while (i>0)
+            {
+                if(set.ElementAt(i)-set.ElementAt(j) ==k)
+                {
+                    count++;
+                    Console.WriteLine($"Pair :  ({set.ElementAt(i)},{set.ElementAt(j)})");
+                    i--;
+                    j--;
+                }
+                else if(set.ElementAt(i) - set.ElementAt(j)<=k)
+                {
+                    j--;
+                }
+                else
+                {
+                    i--;
+                }
+
+            }
+            Console.WriteLine("Count is : " + count);
+
+            //for (int i = set.Count-1; i>0; i--)
+            //{
+            //    for (int j = i-1; j >=0; j--)
+            //    {
+            //        if (set.ElementAt(i) - set.ElementAt(j) == k)
+            //        {
+            //            count++;
+            //            Console.WriteLine($"Pair : {set.ElementAt(i)},{set.ElementAt(j)}");
+            //            break;
+            //        }
+            //    }
+            //}
+        }
+    }
+}
