@@ -1,0 +1,35 @@
+using System;
+
+namespace ProblemSolving
+{
+    class FindTriplets_ZeroSum
+    {
+        static void Main(string[] args) //31
+        {
+            int[] ar1 = {9, 8, 7,-7, 1, -2, 1, 0, 5 }; // { 0,-1,2,-3,1 };
+            int k = 0;
+
+            ZeroSum(ar1, k);
+            Console.Read();
+        }
+
+        private static void ZeroSum(int[] ar1, int k)
+        {
+            int n = ar1.Length;
+
+            for (int i = 0; i <= n/2; i++)
+            {
+                int diff = k - (ar1[i] + ar1[i+1]);
+                int l = i + 2;
+                while (l < n)
+                {
+                    if (ar1[l] == diff)
+                    {
+                        Console.WriteLine($" {ar1[i]} , {ar1[i + 1]} ,{ar1[l]}");
+                    }
+                    l++;
+                }
+            }
+        }
+    }
+}
