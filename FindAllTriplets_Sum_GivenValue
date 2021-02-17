@@ -1,0 +1,70 @@
+using System;
+
+namespace ProblemSolving
+{
+    class FindTriplet_Sum_GivenValue
+    {
+        static void Main(string[] args) //32
+        {
+            int[] ar1 = { 9, -7, 8, 7, 1, -2, -1, 0, 5,-3 }; // { 0,-1,2,-3,1 };
+            int k = 0;
+            Console.WriteLine($"Given sum {k}");
+            FindTriplet_n2(ar1, k);
+            Console.Read();
+        }
+
+        private static void FindTriplet_n2(int[] ar1, int k)
+        {
+            int n = ar1.Length;
+            Array.Sort(ar1);
+            for (int i = 0; i < n - 2; i++)
+            {
+                int j = i + 1;
+                int l = n - 1;
+                    int diff = k - ar1[i];
+
+                while (j < l)
+                {                    
+                    if (ar1[j]+ar1[l] == diff)
+                    {
+                        Console.WriteLine($" {ar1[i]} , {ar1[j]} ,{ar1[l]}");
+                        j++;l--;
+                    }
+                    else if(ar1[j] + ar1[l]< diff)
+                    {
+                        j++;
+                    }
+                    else
+                    {
+                        l--;
+                    }
+                }
+            }
+        }
+
+        private static void FindTriplet(int[] ar1, int k)
+        {
+            int n = ar1.Length;
+            for (int i = 0; i < n-2; i++)
+            {
+                int j = i + 1;
+                while (j < n )
+                {
+                    int l = j + 1;
+                    while (l < n)
+                    {
+                        int diff = k - (ar1[i] + ar1[j]);
+
+                        if (ar1[l] == diff)
+                        {
+                            Console.WriteLine($" {ar1[i]} , {ar1[j]} ,{ar1[l]}");
+                            break;
+                        }
+                        l++;
+                    }
+                    j++;
+                }
+            }
+        }
+    }
+}
