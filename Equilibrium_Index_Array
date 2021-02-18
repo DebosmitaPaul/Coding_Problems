@@ -1,0 +1,64 @@
+using System;
+
+namespace ProblemSolving
+{
+    class Equilibrium_Index_Array
+    {
+        static void Main(string[] args) //36
+        {
+            int[] a = { -7, 1, 5, 2, -4, 3, 0 };
+            int[] b = { -2, 5, 3, 1, 2, 6, -4, 2 };// { -1, 2, 3, 0, 3, 2, -1};
+
+            PrintArray.Print(a);
+            Console.WriteLine();
+
+            Equilibrium_Index(a);
+            Console.WriteLine("-------------------------");
+            Maximum_Equlibrium_Sum(b);
+            Console.Read();
+        }
+
+        private static void Maximum_Equlibrium_Sum(int[] b)
+        {
+            int sum = 0;
+            for (int i = 0; i < b.Length; i++)
+            {
+                sum += b[i];
+            }
+            int lSum = 0;
+            for (int i = 0; i < b.Length; i++)
+            {
+                sum -= b[i];
+                if(sum == lSum)
+                {
+                    lSum += b[i];
+                    break;
+                }
+                lSum += b[i];
+            }
+            Console.WriteLine(lSum);
+        }
+
+        private static void Equilibrium_Index(int[] a)
+        {
+            int sum = 0;
+            int flag = -1;
+            for (int i = 0; i < a.Length; i++)
+            {
+                sum += a[i];
+            }
+            int lsum =0;
+            for (int i =0; i < a.Length; i++)
+            {
+                sum = sum - a[i];
+                if(lsum ==sum)
+                {
+                    flag = i;
+                    break;
+                }
+                lsum += a[i];
+            }
+            Console.WriteLine(flag);
+        }
+    }
+}
