@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProblemSolving
+{
+    class Find_TwoRepeatingElements
+    {
+        static void Main_34(string[] args) //34
+        {
+            int[] a = { 4,3, 2,1,1,1,3, 4, 5, 2, 3, 1 }; //
+            PrintArray.Print(a);
+            Console.WriteLine();
+            FindRepeated_Number(a);
+            Console.Read();
+        }
+
+        private static void FindRepeated_Number(int[] a)
+        {
+            int[] _count = new int[a.Length];
+            Console.Write("Repeated elements are: ");
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (_count[a[i]] == 1)
+                    Console.Write(a[i] + " ");
+                else
+                    _count[a[i]]++;
+            }
+            //--------------my solution-------
+            int count = 1, maxC = 1 ;
+            Array.Sort(a);
+            int n1 = a[0];
+
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            for (int i = 1; i < a.Length; i++)
+            {
+                if(n1!= a[i])
+                {
+                    count = 1;
+                    if (maxC > count)
+                    {
+                        dic.Add(n1, maxC);
+                    }
+                    n1 = a[i];
+                }
+                else
+                {
+                    count++;
+                    maxC = count;
+
+                }
+            }
+            foreach (var item in dic.OrderByDescending(x=>x.Value))
+            {
+                Console.WriteLine(item.Key);
+            }
+        }
+    }
+}
