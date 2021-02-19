@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProblemSolving
+{
+    class Minimize_Three_DiffSortedArrays
+    {
+        static void Main(string[] args) //37
+        {
+            int[] A = { 1, 4, 5, 8, 10 };
+            int[] B = { 6, 9, 15 };
+            int[] C = { 2, 3, 6, 6 };
+
+            Minimize(A, B, C);
+            Console.Read();
+        }
+
+        private static void Minimize(int[] A, int[] B, int[] C)
+        {
+            int a = 0, b = 0, c = 0;
+            while (a<A.Length && b<B.Length && c<C.Length)
+            {
+               int max = Math.Max(A[a], Math.Max(B[b], C[c]));
+               int sum = A[a] + B[b] + C[c];
+               int lmax = sum - max;
+               if(max+1<lmax)
+                {
+                    break;
+                }
+                if (max == B[b])
+                {
+                    a++; c++;
+                }
+                else if (max == A[a])
+                {
+                    b++;c++;
+                }
+                else
+                {
+                    a++;b++;
+                }
+            }
+            int min = Math.Max(A[a], Math.Max(B[b], C[c])) - Math.Min(A[a], Math.Min(B[b], C[c]));
+        }
+    }
+}
